@@ -11,8 +11,8 @@ main {
 
 #game-board {
   background-color: aliceblue;
-  width: 80vh;
-  height: 80vh;
+  width: 95vh;
+  height: 95vh;
   display: grid;
   gap: 1px;
   grid-template-columns: repeat(60, 1fr);
@@ -24,6 +24,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 3px;
 }
 
 #game-board .alive {
