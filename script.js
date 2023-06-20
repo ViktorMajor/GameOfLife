@@ -1,6 +1,19 @@
-const gameBoard = document.getElementById("game-board");
+let gameBoard = document.getElementById("game-board");
+let stepsSlider = document.getElementById("steps");
+let intervalSlider = document.getElementById("interval");
+let stepsValueLabel = document.getElementById("stepsValue");
+let intervalValueLabel = document.getElementById("intervalValue");
+let intervalIDs = [];
 
-const area = 60;
+stepsSlider.oninput = function () {
+  stepsValueLabel.innerText = this.value;
+};
+
+intervalSlider.oninput = function () {
+  intervalValueLabel.innerText = this.value;
+};
+
+const area = 70;
 let board = [];
 
 function setGame() {
@@ -73,7 +86,7 @@ function countNeighbors(i, j) {
 }
 
 function nextStep() {
-  createNextBoard(); 
+  createNextBoard();
 
   for (let i = 0; i < area; i++) {
     for (let j = 0; j < area; j++) {
@@ -81,40 +94,147 @@ function nextStep() {
 
       if (board[i][j] === true && (count === 2 || count === 3)) {
         nextBoard[i][j] = true;
-      } else if (board[i][j] === false && count === 3 ) {
+      } else if (board[i][j] === false && count === 3) {
         nextBoard[i][j] = true;
       } else {
         nextBoard[i][j] = false;
       }
     }
   }
-  board = JSON.parse(JSON.stringify(nextBoard)); 
-  updateBoard(); 
+  board = JSON.parse(JSON.stringify(nextBoard));
+  updateBoard();
 }
-function addPattern(board, pattern, offsetX, offsetY) {
-  for (let i = 0; i < pattern.length; i++) {
-    for (let j = 0; j < pattern[i].length; j++) {
-      board[i + offsetX][j + offsetY] = pattern[i][j];
+
+function clearBoard() {
+  stop();
+  setGame();
+  updateBoard();
+}
+
+function addShape(shape) {
+
+  let startX = Math.floor(area / 2)-10;
+  let startY = Math.floor(area / 2)-10;
+
+  for (let i = 0; i < shape.length; i++) {
+    for (let j = 0; j < shape[i].length; j++) {
+      if (shape[i][j] === 1) {
+        board[startX + i][startY + j] = true;
+      }
     }
+  }
+
+  updateBoard();
+}
+
+let shapes = {
+  glider: [
+    [0, 1, 0],
+    [0, 0, 1],
+    [1, 1, 1]
+  ],
+  lwss: [
+    [0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1],
+    [1, 1, 1, 1, 0]
+  ],
+  tumbler: [
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 1, 0, 1, 1, 0],
+    [1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 0, 1]
+  ],
+  beacon: [
+    [1, 1, 0, 0],
+    [1, 1, 0, 0],
+    [0, 0, 1, 1],
+    [0, 0, 1, 1]
+  ],
+  pentadecathlon: [
+    [0, 0, 1, 0, 0],
+    [0, 1, 0, 1, 0],
+    [0, 1, 1, 1, 0],
+    [0, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0],
+  ],
+  acorn: [
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [1, 1, 0, 0, 1, 1, 1],
+  ],
+  figureeight: [
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 0, 1, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0, 1, 0, 0],
+    [0, 1, 0, 1, 1, 0, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0]
+  ],
+  twoprehasslers: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+  ],
+  p26prepulsarshuttle: [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+  ],
+  merzenichp31: [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+};
+
+
+
+
+
+function play() {
+  stop();
+  let steps = parseInt(stepsSlider.value);
+  let interval = parseInt(intervalSlider.value);
+  for (let i = 0; i < steps; i++) {
+    let intervalID = setTimeout(() => {
+      nextStep();
+    }, interval * i);
+    intervalIDs.push(intervalID);
   }
 }
 
-function addPattern(board, pattern, offsetX, offsetY) {
-  for (let i = 0; i < pattern.length; i++) {
-    for (let j = 0; j < pattern[i].length; j++) {
-      board[i + offsetX][j + offsetY] = pattern[i][j];
-    }
+function stop() {
+  while (intervalIDs.length > 0) {
+    clearTimeout(intervalIDs.pop());
   }
-}
-
-function play(){
-  for (let i = 0; i < 40; i++){
-    setTimeout(() => {
-      nextStep()
-    }, 300 * i);
-}
-
- 
 }
 
 setGame();

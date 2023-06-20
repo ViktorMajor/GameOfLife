@@ -1,28 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conway's Game of Life</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <main id="main">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conway's Game of Life</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main id="main">
+      <div id="game-rules">
+        <h1>Conway's Game of Life</h1>
+        <h2>Játékszabályok:</h2>
+        <div>
+          <p>
+            A játék 2 egszerű szabályra épül, mégis egy ugynevezett mesterséges
+            élet jön létre általa. Képes meghalni, szaporodni, elnyelni más
+            alakzatokat. 1. Az az élő sejt, amelyiknek két vagy három élő
+            szomszédja van, életben marad. Ha több vagy kevesebb van, akkor
+            elpuztul. 2. az a halott sejt, amelyiknek pontosan három élő
+            szomszédja van, életre kel.
+          </p>
+          <p>További információ <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life " target="_blank">itt</a> olvasható a játékról.</p>
+        </div>
+      </div>
+      <div id="game-board"></div>
+      <div class="button-container">
+        <button onclick="play()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="clearBoard()">Tábla törlése</button>
+      </div>
+      <div class="button-container">
+        <button onclick="addShape(shapes.glider)">Glider hozzáadása</button>
+        <button onclick="addShape(shapes.lwss)">
+          Lightweight Spaceship hozzáadása
+        </button>
+        <button onclick="addShape(shapes.tumbler)">Tumbler hozzáadása</button>
+        <button onclick="addShape(shapes.beacon)">Beacon hozzáadása</button>
+        <button onclick="addShape(shapes.pentadecathlon)">
+          Pentadecathlon hozzáadása
+        </button>
+        <button onclick="addShape(shapes.acorn)">Acorn hozzáadása</button>
+        <button onclick="addShape(shapes.twoprehasslers)">
+          Twoprehasslers hozzáadása
+        </button>
+        <button onclick="addShape(shapes.p26prepulsarshuttle)">
+          P26prepulsarshuttle hozzáadása
+        </button>
+        <button onclick="addShape(shapes.merzenichp31)">
+          Merzenichp31 hozzáadása
+        </button>
+      </div>
 
-    <div id="game-board"></div>
-    <button onclick="play()">Start</button>
-    <div id="game-rules">
-      <h1>Conway's Game of Life</h1>
-      <h2>Játékszabályok:</h2>
-      <ul>
-        <li>1. Élő sejt, amelynek kevesebb, mint két élő szomszédja van, elpusztul.</li>
-        <li>2. Élő sejt, amelynek két vagy három élő szomszédja van, életben marad a következő körben.</li>
-        <li>3. Élő sejt, amelynek több, mint három élő szomszédja van, elpusztul.</li>
-        <li>4. Halott sejt, amelynek pontosan három élő szomszédja van, életre kel a következő körben.</li>
-      </ul>
-    </div>
-  </main>
-  <script src="./script.js"></script>
-</body>
+      <label for="steps">Körök száma: <span id="stepsValue">20</span></label>
+      <input
+        type="range"
+        id="steps"
+        name="steps"
+        min="1"
+        max="100"
+        value="20"
+      />
+      <label for="interval"
+        >Körök közötti idő (ms): <span id="intervalValue">390</span></label
+      >
+      <input
+        type="range"
+        id="interval"
+        name="interval"
+        min="100"
+        max="1000"
+        value="390"
+      />
+    </main>
+    <script src="./script.js"></script>
+  </body>
 </html>
