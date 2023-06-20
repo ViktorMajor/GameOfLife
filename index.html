@@ -4,12 +4,23 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Conway's Game of Life</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main id="main">
+    <h1>Conway's Game of Life</h1>
     <div id="game-board"></div>
+    <button onclick="play()">Start</button>
+    <div id="game-rules">
+      <h2>Játékszabályok:</h2>
+      <ul>
+        <li>1. Élő sejt, amelynek kevesebb, mint két élő szomszédja van, elpusztul.</li>
+        <li>2. Élő sejt, amelynek két vagy három élő szomszédja van, életben marad a következő körben.</li>
+        <li>3. Élő sejt, amelynek több, mint három élő szomszédja van, elpusztul.</li>
+        <li>4. Halott sejt, amelynek pontosan három élő szomszédja van, életre kel a következő körben.</li>
+      </ul>
+    </div>
   </main>
   <script src="./script.js"></script>
 </body>

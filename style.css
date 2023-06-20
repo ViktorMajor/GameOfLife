@@ -1,25 +1,36 @@
 body {
   background-color: aquamarine;
 }
+
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 #game-board {
   background-color: aliceblue;
-  width: 50vw; 
-  height: 50vw; 
+  width: 80vh;
+  height: 80vh;
   display: grid;
-  gap: 2px;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10,1fr);
+  gap: 1px;
+  grid-template-columns: repeat(60, 1fr);
+  grid-template-rows: repeat(60, 1fr);
 }
 
 #game-board div {
   background-color: rgb(37, 64, 101);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #game-board .alive {
   background-color: chartreuse;
+}
+
+#game-rules {
+  margin-top: 20px;
+  text-align: center;
 }
