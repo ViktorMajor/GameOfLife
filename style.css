@@ -40,14 +40,15 @@ main {
 
 .game {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row-reverse;
   align-items: center;
 }
 
 .settings {
-  width: 50%;
+  width: 40%;
 }
+
 
 @keyframes fadeIn {
   from {
@@ -132,21 +133,27 @@ button:active {
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 button:nth-child(odd) {
-  background-color: #877c3a; /* Golden yellow for odd buttons */
+  background-color: #877c3a; 
 }
 
 button:nth-child(even) {
-  background-color: #477689; /* Sky blue for even buttons */
+  background-color: #477689; 
 }
 
 button:nth-child(odd):hover {
-  background-color: #EBC600; /* Darker shade of golden yellow for hover on odd buttons */
+  background-color: #EBC600; 
 }
 
 button:nth-child(even):hover {
-  background-color: #76B2D1; /* Darker shade of sky blue for hover on even buttons */
+  background-color: #76B2D1; 
 }
 
+.inputs {
+  margin: 20px 0;
+}
+.inputs div {
+  margin: 20px 0;
+}
 
 input[type="range"] {
   -webkit-appearance: none;
