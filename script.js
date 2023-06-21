@@ -13,7 +13,7 @@ intervalSlider.oninput = function () {
   intervalValueLabel.innerText = this.value;
 };
 
-const area = 90;
+const area = 110;
 let board = [];
 
 function setGame() {
@@ -129,8 +129,8 @@ function clearBoard() {
 }
 
 function addShape(shape) {
-  let startX = Math.floor(area / 2) - 20;
-  let startY = Math.floor(area / 2) - 20;
+  let startX = Math.floor(area / 2) - 10;
+  let startY = Math.floor(area / 2) - 10;
 
   for (let i = 0; i < shape.length; i++) {
     for (let j = 0; j < shape[i].length; j++) {
