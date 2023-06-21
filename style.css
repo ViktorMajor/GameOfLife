@@ -41,13 +41,15 @@ main {
 .game {
   display: flex;
   justify-content: space-around;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   align-items: flex-end;
 }
-
-.settings {
-  width: 40%;
+.b-b {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 
 
 @keyframes fadeIn {
@@ -67,7 +69,7 @@ main {
   gap: 1px;
   grid-template-columns: repeat(90, 1fr);
   grid-template-rows: repeat(90, 1fr);
-  margin-top: 20px;
+  margin: 20px auto;
 }
 
 #game-board div {
