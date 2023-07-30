@@ -8,119 +8,107 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+
     <main id="main">
-      <div id="game-rules">
-        <h1>Merülj el a Conway-féle Élet játékban</h1>
-        <h3>
-          Alakítsd, formázd, és tanulmányozd a sejtek szüntelen mozgását ebben
-          a varázslatos sejtautomata univerzumban.
-        </h3>
-        <h2>Játékszabályok:</h2>
-        <div>
+      <div id="game-description" class="retro-style">
+       
+        <h1>Game of Life</h1>
+        <p>Fedezz fel egy valódi sejtautomatát, egy programot mely egyesek szerint a legnagyobb kárt okozta a világgazdaságnak. Aminek egyszerűen az, hogy mindenki ezzel játszott munka helyett. </p>
+        <div class="rules" id="rules">
+          <h2>Játékszabályok:</h2>
           <p>
             A Conway-féle Élet játék, amit John Horton Conway brit matematikus
             álmodott meg, egyszerű, de annál erőteljesebb szabályokra épül.
-            Annak ellenére, hogy a szabályai letisztultak, elképesztően
-            komplex és sokrétű mintázatokat képesek generálni. A sejtek életre
-            kelnek, szaporodnak, és eltűnnek, imitálva az élet dinamikus
-            körforgását. A játékszabályok a következők:
+            Annak ellenére, hogy a szabályai letisztultak, elképesztően komplex
+            és sokrétű mintázatokat képesek generálni. A sejtek életre kelnek,
+            szaporodnak, és eltűnnek, imitálva az élet dinamikus körforgását. A
+            játékszabályok a következők:
           </p>
           <ol>
             <li>
-              Az élő sejt, melynek két vagy három élő szomszédja van, tovább
-              él. Ha kevesebb, vagy több szomszédja van, akkor elpusztul. Ez
-              utánzatát adja annak, ahogy az életben a túl kevés erőforrás,
-              vagy a túl sok konkurencia gyakran nem teszi lehetővé az
-              élőlények túlélését.
+              Az élő sejt, melynek két vagy három élő szomszédja van, tovább él.
+              Ha kevesebb, vagy több szomszédja van, akkor elpusztul. Ez
+              utánzatát adja annak, ahogy az életben a túl kevés erőforrás, vagy
+              a túl sok konkurencia gyakran nem teszi lehetővé az élőlények
+              túlélését.
             </li>
             <li>
               A halott sejt, melynek pontosan három élő szomszédja van,
-              újjászületik. Ez a szabály azt szemlélteti, hogy az élet új
-              formái az optimális körülmények között jöhetnek létre.
+              újjászületik. Ez a szabály azt szemlélteti, hogy az élet új formái
+              az optimális körülmények között jöhetnek létre.
             </li>
           </ol>
         </div>
       </div>
-      <div class="game">
-        <div class="b-b">
-          <div>
-            <div id="game-board">
+      <div class="game retro-style">
+        <div>
+          <div id="game-board"></div>
+        </div>
+        <div class="settings retro-style">
+          <div class="controllers">
+            <button id="start-button" onclick="play()">Start</button>
+            <button id="stop-button" onclick="stop()">Stop</button>
+  
+            <button id="clear-button" onclick="clearBoard()">
+              Tábla törlése
+            </button>
+          </div>
+          <div class="inputs">
+            <div>
+              <label for="steps"
+                >Lépések száma: <span id="stepsValue">20</span></label
+              >
+              <input
+                type="range"
+                id="steps"
+                name="steps"
+                min="1"
+                max="500"
+                value="20"
+              />
             </div>
-            <div class="button-container controllers">
-              <button id="start-button" onclick="play()">Start</button>
-              <button id="stop-button" onclick="stop()">Stop</button>
-              
-              <button id="clear-button" onclick="clearBoard()">Tábla törlése</button>
-            </div>
-            <div class="inputs">
-              <div>
-                <label for="steps"
-                  >Lépések száma: <span id="stepsValue">20</span></label
-                >
-                <input
-                  type="range"
-                  id="steps"
-                  name="steps"
-                  min="1"
-                  max="500"
-                  value="20"
-                />
-              </div>
-
-              <div>
-                <label for="interval"
-                  >Körök közötti idő (ms):
-                  <span id="intervalValue">300</span></label
-                >
-                <input
-                  type="range"
-                  id="interval"
-                  name="interval"
-                  min="20"
-                  max="1000"
-                  value="390"
-                />
-              </div>
+  
+            <div>
+              <label for="interval"
+                >Körök közötti idő (ms):
+                <span id="intervalValue">300</span></label
+              >
+              <input
+                type="range"
+                id="interval"
+                name="interval"
+                min="20"
+                max="1000"
+                value="390"
+              />
             </div>
           </div>
-          <div class="settings">
-            
-          
-            <div class="button-container">
-              <button onclick="addShape(shapes.glider)">
-                Glider hozzáadása
-              </button>
-              <button onclick="addShape(shapes.lwss)">
-                Light weight Spaceship hozzáadása
-              </button>
-              <button onclick="addShape(shapes.tumbler)">
-                Tumbler hozzáadása
-              </button>
-              <button onclick="addShape(shapes.gliderGun)">
-                Glider Gun hozzáadása
-              </button>
-              <button onclick="addShape(shapes.queenBeeShuttle)">
-                Queen Bee Shuttle hozzáadása
-              </button>
-              <button onclick="addShape(shapes.pentadecathlon)">
-                Penta Decathlon hozzáadása
-              </button>
-
-              <button onclick="addShape(shapes.twoprehasslers)">
-                Two Prehasslers hozzáadása
-              </button>
-              <button onclick="addShape(shapes.p26prepulsarshuttle)">
-                P26prepulsar shuttle hozzáadása
-              </button>
-              <button onclick="addShape(shapes.merzenichp31)">
-                Merzenichp 31 hozzáadása
-              </button>
-            </div>
-      
+  
+          <div class="button-container">
+            <button onclick="addShape(shapes.glider)">Glider hozzáadása</button>
+            <button onclick="addShape(shapes.lwss)">
+              Light weight Spaceship hozzáadása
+            </button>
+            <button onclick="addShape(shapes.tumbler)">Tumbler hozzáadása</button>
            
+       
+            <button onclick="addShape(shapes.pentadecathlon)">
+              Penta Decathlon hozzáadása
+            </button>
+  
+            <button onclick="addShape(shapes.twoprehasslers)">
+              Two Prehasslers hozzáadása
+            </button>
+            <button onclick="addShape(shapes.p26prepulsarshuttle)">
+              P26prepulsar shuttle hozzáadása
+            </button>
+            <button onclick="addShape(shapes.merzenichp31)">
+              Merzenichp 31 hozzáadása
+            </button>
           </div>
         </div>
       </div>
+      
     </main>
     <script src="./script.js"></script>
   </body>
