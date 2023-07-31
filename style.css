@@ -9,6 +9,14 @@ p, li{
 h1 {
   font-size: 1.2rem;
 }
+a {
+  color: #999; 
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #fff; 
+}
 body {
   background-color: #000; 
   color: #fff;
@@ -58,8 +66,8 @@ body {
 
 .settings.retro-style {
  
-  background-color: #222; /* Darker gray background */
-  border: 2px solid #666; /* Gray border */
+  background-color: #222; 
+  border: 2px solid #666; 
   padding: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
 }
@@ -175,18 +183,9 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 
-a {
-  color: #999; /* Light gray link color */
-  text-decoration: underline;
-}
 
-a:hover {
-  color: #fff; /* White link color on hover */
-}
 
-.hamburger-menu .bar {
-  background-color: #999; /* Light gray menu icon bars */
-}
+
 
 
 

@@ -1,7 +1,4 @@
-function toggleMenu() {
-  const rules = document.getElementById("rules");
-  rules.classList.toggle("active");
-}
+
 
 
 
