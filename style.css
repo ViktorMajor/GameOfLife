@@ -29,6 +29,7 @@ body {
   background-color: #333;
   width: 40vw;
   height:40vw;
+  max-width: 100%;
   display: grid;
   gap: 1px;
   grid-template-columns: repeat(30, 1fr);
@@ -178,52 +179,4 @@ input[type=range]:focus::-ms-fill-upper {
   background: #B6B6B6;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (max-width: 500px){
-  body {
-    font-size: 12px;
-  }
-
-  h1 {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-  }
-
-  p,
-  h2,
-  h3,
-  li,
-  label {
-    margin: 0.5rem 0;
-    
-  }
-
-  button {
-    font-size: 0.8rem;
-  }
-
-  .game {
-    flex-direction: column;
-  }
-
-
-
-  #game-board {
-    display: grid;
-    width: 60vw;
-    height:60vw;
-    grid-template-columns: repeat(30, 1fr);
-    grid-template-rows: repeat(30, 1fr);
-  }
-}
 
