@@ -17,7 +17,7 @@ intervalSlider.oninput = function () {
   intervalValueLabel.innerText = this.value;
 };
 
-const area = 30;
+const area = 35;
 let board = [];
 
 function setGame() {
