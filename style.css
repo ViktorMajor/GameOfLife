@@ -30,8 +30,8 @@ body {
   max-width: 100%;
   display: grid;
   gap: 1px;
-  grid-template-columns: repeat(35, 1fr);
-  grid-template-rows: repeat(35, 1fr);
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(40, 1fr);
   margin: auto;
 }
 
